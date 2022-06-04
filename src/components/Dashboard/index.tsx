@@ -3,6 +3,7 @@ import { Home, BookOpen, Users } from 'react-feather';
 
 import Menu from "../Menu"
 import Card from '../Card';
+import UsersComponent from '../Users';
 
 import { StyledDashboard, StyledContent } from './styles'
 
@@ -10,7 +11,7 @@ const items = [
     {
         title: "Início",
         icon: <Home />,
-        component: <Card children={<p>Seja bem vindo, Matheus!</p>} title="Inicio"/>
+        component: <Card children={<p>Seja bem vindo!</p>} title="Seja bem vindo!"/> 
     },
     {
         title: "Cursos",
@@ -20,7 +21,7 @@ const items = [
     {
         title: "Usuários",
         icon: <Users />,
-        component: <Card children={<p>Aqui estarão as funcionalidades relacionadas à usuários</p>} title="Usuários"/>
+        component: <UsersComponent />
     },
 ]
 

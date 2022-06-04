@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme'
 
 export const StyledCard = styled.div`
     background: #fff;
@@ -6,7 +7,7 @@ export const StyledCard = styled.div`
     border: 1px solid #ddd;
     border-radius: .5rem;
     width: 100%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: ${theme.shadows.sm};
 
     .card__title {
         font-size: 2rem;

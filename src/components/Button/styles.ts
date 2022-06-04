@@ -2,7 +2,10 @@ import styled, { css } from 'styled-components'
 import { theme } from "../../theme"
 
 export const StyledButton = styled.button`
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
     width: 100%;
     padding: .5rem 1rem;
     text-align: center;

@@ -6,4 +6,5 @@ export const StyledDashboard = styled.main`
 
 export const StyledContent = styled.div`
     padding: 3rem;
+    flex-grow: 1;
 `
