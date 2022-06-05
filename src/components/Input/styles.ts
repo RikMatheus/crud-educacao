@@ -4,10 +4,15 @@ import { theme } from '../../theme'
 export const StyledInput = styled.div`
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 1rem;
+
+    :last-child {
+        margin-bottom: 0;
+    }
 
     p {
         font-size: ${theme.fonts.base};
-        padding: 1rem 0;
+        margin-bottom: .5rem;
     }
 
     input {
@@ -15,7 +20,7 @@ export const StyledInput = styled.div`
         padding: .5rem;
         border: 1px solid #ccc;
         border-radius: .25rem;
-        
+
         ::placeholder {
             font-size: ${theme.fonts.base};
         }

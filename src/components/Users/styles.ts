@@ -20,7 +20,6 @@ export const StyledUsers = styled.div`
 `
 
 export const StyledForm = styled.form`
-    display: flex;
     gap: 1rem;
     padding: 1rem;
     margin-bottom: 2rem;
@@ -29,15 +28,18 @@ export const StyledForm = styled.form`
     box-shadow: ${theme.shadows.sm};
 
     .users__form-inputs {
-        width: 75%;
+        display: flex;
+        gap: 1rem;
     }
 
     .users__form-actions {
-        width: 25%;
         display: flex;
-        flex-direction: column;
         justify-content: flex-end;
         gap: .5rem;
+
+        button {
+            max-width: fit-content;
+        }
     }
 `
 

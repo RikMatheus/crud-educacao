@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Plus } from "react-feather"
 
 import Button from "../Button"
@@ -8,10 +8,31 @@ import { StyledUsers, StyledTable, StyledForm } from "./styles"
 
 export default function Users () {
     const [ isFormOpen, setFormOpen ] = useState<boolean>(false)
+    const [ users, setUsers ] = useState(null)
 
-    const handleFormShow = () => {
+    const handleFormShow = (e) => {
+        e.preventDefault()
         setFormOpen(!isFormOpen)
     }
+
+    const handleUserCreation = async (e) => {
+        e.preventDefault()
+        await fetch('http://localhost:3000/api/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: "Mario",
+                email: "ultimopassageiro@redetv.com",
+                senha: "1234"
+            })
+        })
+    }
+
+    useEffect(() => {
+        fetch('/api/users')
+            .then(res => res.json().then(list => setUsers(list)))
+            .catch(err => console.log(err))
+    }, [handleUserCreation])
 
     return (
         <StyledUsers>
@@ -43,11 +64,13 @@ export default function Users () {
                         </div>
                         <div className="users__form-actions">
                             <Button
-                                text="Cadastrar"
-                            />
-                            <Button
                                 variant="outline"
                                 text="Cancelar"
+                                onClick={ handleFormShow }
+                            />
+                            <Button
+                                text="Cadastrar"
+                                onClick={ handleUserCreation }
                             />
                         </div>
                     </StyledForm>
@@ -61,24 +84,18 @@ export default function Users () {
                         <th>Criado em</th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>Matheus Henrique</td>
-                        <td>matheus@matheus.com</td>
-                        <td>Ontem</td>
-                        <td>Detalhes</td>
-                    </tr>
-                    <tr>
-                        <td>Matheus Henrique</td>
-                        <td>matheus@matheus.com</td>
-                        <td>Ontem</td>
-                        <td>Detalhes</td>
-                    </tr>
-                    <tr>
-                        <td>Matheus Henrique</td>
-                        <td>matheus@matheus.com</td>
-                        <td>Ontem</td>
-                        <td>Detalhes</td>
-                    </tr>
+                    {
+                        users && users.map(user => {
+                            return (
+                                <tr>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.created_at}</td>
+                                    <td>Detalhes</td>
+                                </tr>
+                            )
+                        })
+                    }
                 </StyledTable>
             </div>
         </StyledUsers>
