@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { useDB } from "../../src/services/database"
+import { useDB } from "../../src/services/database.mjs"
 
 export default async function Courses (req: NextApiRequest, res: NextApiResponse) {
     if(req.method !== 'GET') {

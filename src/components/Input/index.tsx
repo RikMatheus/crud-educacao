@@ -7,14 +7,15 @@ type InputProps = {
     errorMessage?: string
     required?: boolean,
     pattern?: string,
+    value?: string,
     onChange?: (e: any) => void
 }
 
-export default function Input({ label, type, placeholder, errorMessage, required, pattern, onChange }: InputProps) {
+export default function Input({ label, type, placeholder, errorMessage, required, pattern, value, onChange }: InputProps) {
     return (
         <StyledInput onChange={ onChange }>
             <p>{ label }</p>
-            <input type={ type } placeholder={ placeholder } required={ required } pattern={ pattern } />
+            <input type={ type } value={ value } placeholder={ placeholder } required={ required } pattern={ pattern } />
             <span>{ errorMessage }</span>
         </StyledInput>
     )

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { useDB } from "../../../src/services/database"
+import { useDB } from "../../../src/services/database.mjs"
 
 export default async function CourseId (req: NextApiRequest, res: NextApiResponse) {
     const db = await useDB()

@@ -13,7 +13,7 @@ export default async function UserId (req: NextApiRequest, res: NextApiResponse)
             req.query.id
         ])
         statement.finalize()
-    }    
+    }
 
     if(req.method === 'DELETE') {
         const statement = await db.prepare('DELETE FROM users WHERE id = ?')

@@ -21,11 +21,25 @@ export const StyledUsers = styled.div`
 
 export const StyledForm = styled.form`
     gap: 1rem;
-    padding: 1rem;
     margin-bottom: 2rem;
     border-radius: .5rem;
     border: 1px solid ${theme.colors.secondary};
     box-shadow: ${theme.shadows.sm};
+    overflow: hidden;
+
+    .users__form-header {
+        background: ${theme.colors.primary};
+        color: ${theme.colors.background};
+        padding: .5rem 1rem;
+        
+        p {
+            font-size: ${theme.fonts.sm};
+        }
+    }
+
+    .users__form-content {
+        padding: 1rem;
+    }
 
     .users__form-inputs {
         display: flex;
