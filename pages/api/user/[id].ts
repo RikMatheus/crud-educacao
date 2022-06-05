@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { finalize } from 'sqlite3' 
 
-import { useDB } from "../../../src/services/database"
+import { useDB } from "../../../src/services/database.mjs"
 
 export default async function UserId (req: NextApiRequest, res: NextApiResponse) {
     const db = await useDB()
@@ -14,6 +13,18 @@ export default async function UserId (req: NextApiRequest, res: NextApiResponse)
             req.query.id
         ])
         statement.finalize()
+    }    
+
+    if(req.method === 'DELETE') {
+        const statement = await db.prepare('DELETE FROM users WHERE id = ?')
+        statement.run([
+            req.query.id
+        ])
+        statement.finalize()
+
+        res.json({})
+
+        return
     }
 
     const user = await db.get('SELECT id, name, email, created_at FROM users WHERE id = ?', 

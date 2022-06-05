@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Plus } from "react-feather"
+import { Plus, X } from "react-feather"
 
 import Button from "../Button"
 import Input from "../Input"
@@ -42,17 +42,38 @@ export default function Users () {
                 password: password
             })
         })
+
+// node ./src/services/database.mjs && 
+
+        fetch('/api/users')
+            .then(res => res.json().then(list => {
+                setUsers(list)
+            }))
+            .catch(err => console.log(err))
     }
 
-    useEffect(() => { console.log(name, email, password) }, [
-        name, email, password
-    ])
+    const handleUserDeletion = async (id) => {
+        await fetch(`/api/user/${id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        })
+
+        await fetch('/api/users')
+            .then(res => res.json().then(list => {
+                setUsers(list)
+                console.log(users)
+            }))
+            .catch(err => console.log(err))
+    }
 
     useEffect(() => {
         fetch('/api/users')
-            .then(res => res.json().then(list => setUsers(list)))
+            .then(res => res.json().then(list => {
+                setUsers(list)
+                console.log(users)
+            }))
             .catch(err => console.log(err))
-    }, [handleUserCreation])
+    }, [])
 
     return (
         <StyledUsers>
@@ -76,18 +97,24 @@ export default function Users () {
                                 type="text"
                                 placeholder="Matheus Henrique"
                                 onChange={ handleNameChange }
+                                required
                             />
                             <Input
                                 label="E-mail"
-                                type="text"
+                                type="email"
                                 placeholder="neste@formato.com"
                                 onChange={ handleEmailChange }
+                                errorMessage="Insira um e-mail válido."
+                                required
                             />
                             <Input
                                 label="Senha"
                                 type="password"
                                 placeholder="********"
                                 onChange={ handlePasswordChange }
+                                pattern="^[A-Za-z0-9]{6,15}$"
+                                errorMessage="A senha deve ter entre 6 e 15 caracteres."
+                                required
                             />
                         </div>
                         <div className="users__form-actions">
@@ -105,24 +132,29 @@ export default function Users () {
             }
             <div className="users__content">
                 <StyledTable>
-                    <tr>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>Criado em</th>
-                        <th></th>
-                    </tr>
-                    {
-                        users && users.map(user => {
-                            return (
-                                <tr>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.created_at}</td>
-                                    <td>Detalhes</td>
-                                </tr>
-                            )
-                        })
-                    }
+                    <tbody>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Criado em</th>
+                            <th></th>
+                        </tr>
+                        {
+                            users && users.map(user => {
+                                return (
+                                    <tr key={user.id}>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>{user.created_at}</td>
+                                        <td>
+                                            <span className="table__edit">Editar</span>
+                                            <span className="table__delete" onClick={() => handleUserDeletion(user.id)}>Excluir</span>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
                 </StyledTable>
             </div>
         </StyledUsers>

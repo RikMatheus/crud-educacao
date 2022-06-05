@@ -13,12 +13,6 @@ async function setup () {
     await db.migrate({ force: 'last' })
 
     console.info('database - finished migration')
-
-    // const users = await db.all('SELECT name, email, created_at FROM users')
-    // console.log('USERS', JSON.stringify(users, null, 2))
-
-    // const courses = await db.all('SELECT * FROM courses')
-    // console.log('COURSES', JSON.stringify(courses, null, 2))
 }
 
-setup()
+// setup()

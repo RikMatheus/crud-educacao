@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "node ./src/services/database.mjs && next",
+    "dev": "next",
     "build": "next build",
     "start": "next start"
   },

@@ -65,7 +65,27 @@ export const StyledTable = styled.table`
     }
 
     td:last-child {
+        display: flex;
+        justify-content: space-evenly;
         font-weight: bolder;
+    }
+
+    .table__edit, .table__delete {
+        cursor: pointer;
+        padding: .25rem .5rem;
+        border-radius: .25rem;
+        transition: all .2s ease;
+        
+        :hover {
+            background-color: ${theme.colors.secondary};
+        }
+    }
+
+    .table__edit {
         color: ${theme.colors.primary};
+    }
+
+    .table__delete {
+        color: ${theme.colors.error};
     }
 `

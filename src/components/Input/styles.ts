@@ -25,4 +25,17 @@ export const StyledInput = styled.div`
             font-size: ${theme.fonts.base};
         }
     }
+
+    span {
+        font-size: ${theme.fonts.xs};
+        display: none;
+        color: ${theme.colors.error};
+        margin-bottom: 1rem;
+    }
+
+    input:invalid {
+        ~ span {
+            display: block;
+        }
+    }
 `
