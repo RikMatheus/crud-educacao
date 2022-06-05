@@ -10,6 +10,22 @@ export default function Users () {
     const [ isFormOpen, setFormOpen ] = useState<boolean>(false)
     const [ users, setUsers ] = useState(null)
 
+    const [ name, setName ] = useState(null)
+    const [ email, setEmail ] = useState(null)
+    const [ password, setPassword ] = useState(null)
+
+    const handleNameChange = (e) => {
+        setName(e.target.value)
+    }
+    
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
+    }
+
     const handleFormShow = (e) => {
         e.preventDefault()
         setFormOpen(!isFormOpen)
@@ -21,12 +37,16 @@ export default function Users () {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                name: "Mario",
-                email: "ultimopassageiro@redetv.com",
-                senha: "1234"
+                name: name,
+                email: email,
+                password: password
             })
         })
     }
+
+    useEffect(() => { console.log(name, email, password) }, [
+        name, email, password
+    ])
 
     useEffect(() => {
         fetch('/api/users')
@@ -49,17 +69,25 @@ export default function Users () {
             {
                 isFormOpen && 
                 <div className="users__form">
-                    <StyledForm>
+                    <StyledForm onSubmit={ handleUserCreation }>
                         <div className="users__form-inputs">
                             <Input
                                 label="Nome"
                                 type="text"
                                 placeholder="Matheus Henrique"
+                                onChange={ handleNameChange }
+                            />
+                            <Input
+                                label="E-mail"
+                                type="text"
+                                placeholder="neste@formato.com"
+                                onChange={ handleEmailChange }
                             />
                             <Input
                                 label="Senha"
                                 type="password"
                                 placeholder="********"
+                                onChange={ handlePasswordChange }
                             />
                         </div>
                         <div className="users__form-actions">
@@ -70,7 +98,6 @@ export default function Users () {
                             />
                             <Button
                                 text="Cadastrar"
-                                onClick={ handleUserCreation }
                             />
                         </div>
                     </StyledForm>
