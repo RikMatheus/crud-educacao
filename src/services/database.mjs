@@ -15,4 +15,4 @@ async function setup () {
     console.info('database - finished migration')
 }
 
-// setup()
+setup()

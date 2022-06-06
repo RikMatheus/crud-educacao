@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "start": "node ./src/services/database.mjs && next start",
     "test": "npx cypress run"
   },
   "dependencies": {
