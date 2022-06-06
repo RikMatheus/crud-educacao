@@ -22,7 +22,7 @@ CREATE TABLE users_courses (
     created_at TEXT
 );
 
-INSERT INTO users (name, email, password, created_at) VALUES ('Matheus', 'matheus@matheus.com', 'senha', datetime('now'));
+INSERT INTO users (name, email, password, created_at) VALUES ('Fulano', 'user@example.com', 'password', datetime('now'));
 
 INSERT INTO courses (title, description, tuition, created_at) VALUES ('Introdução à Javascript', 'Curso de JS', '200', datetime('now'));
 

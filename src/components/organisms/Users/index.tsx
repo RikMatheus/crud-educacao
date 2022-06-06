@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { Plus, X } from "react-feather"
 
-import Button from "../Button"
-import Input from "../Input"
+import Button from "../../atoms/Button"
+import Input from "../../atoms/Input"
 
 import { StyledUsers, StyledTable, StyledForm } from "./styles"
 
@@ -13,6 +13,11 @@ type User = {
     created_at: string,
     password: string,
 }
+
+/**
+ * Nesta página, todo o gerenciamento de formulários foi feito na unha,
+ * apenas com os estados disponíveis na página.
+ */
 
 export default function Users () {
     const [ isFormOpen, setFormOpen ] = useState<boolean>(false)
@@ -39,6 +44,7 @@ export default function Users () {
     const handleFormShow = (e) => {
         e.preventDefault()
         setFormOpen(!isFormOpen)
+        setEditFormOpen(false)
 
         setName('')
         setEmail('')
@@ -55,7 +61,7 @@ export default function Users () {
 
     const handleEditFormClose = (e) => {
         e.preventDefault()
-
+        setEditFormOpen(false)
     }
 
     const handleUserCreation = async (e) => {
@@ -107,9 +113,8 @@ export default function Users () {
         await fetch('/api/users')
             .then(res => res.json().then(list => {
                 setUsers(list)
-                console.log(users)
             }))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
     }
 
     useEffect(() => {

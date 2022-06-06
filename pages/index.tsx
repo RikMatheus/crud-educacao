@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import Login from './Login'
+import Login from '../src/components/templates/Login'
 
 const Title = styled.h1`
   font-size: 50px;
