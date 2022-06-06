@@ -1,82 +1,32 @@
-# Example app with styled-components
+# CRUD básico de usuários em NextJS e SQLite
 
-This example features how you use a different styling solution than [styled-jsx](https://github.com/vercel/styled-jsx) that also supports universal styles. That means we can serve the required styles for the first render within the HTML and then load the rest in the client. In this case we are using [styled-components](https://github.com/styled-components/styled-components).
+Desenvolvida neste último final de semana, esta aplicação consiste em efetuar as quatro operações básicas sobre uma base que persiste dados de usuários.
+Isso signfica que por mais que funcione numa opção _self hosted_ não há suporte à persistência em ambientes com memória "efêmera" como na _Vercel_.
 
-This example uses the Rust-based [SWC](https://nextjs.org/docs/advanced-features/compiler#styled-components) in Next.js for better performance than Babel.
+Fiz um vídeo explicando como funciona o fluxo principal neste vídeo disponível no botão abaixo, deixa um like!:
+***
+<a href="https://youtu.be/9wendQ2O5T4" target="_blank">![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)</a>
+***
+## Implementação
 
-Currently, only the `ssr` and `displayName` transforms have been implemented. These two transforms are the main requirement for using `styled-components` in Next.js.
+Para organização das pastas, foi aplicada a metodologia de [_Atomic Design_](https://atomicdesign.bradfrost.com/) e para a estilização dos componentes foi usada a biblioteca [_Styled Components_](https://styled-components.com/). As rotas de API são geradas e consumidas na própria aplicação.
 
-## Deploy your own
+O layout foi baseado nos exemplos de componentes disponíveis na biblioteca [_Tailwind UI _](https://tailwindui.com/preview), e os protótipos criados estão disponíveis para visualização por meio [_deste link_](https://www.figma.com/file/8a7ns0unL7Y7GSnCEaNMwk/CRUD-Educa%C3%A7%C3%A3o?node-id=0%3A1).
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-styled-components)
+## Autenticação
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-styled-components&project-name=with-styled-components&repository-name=with-styled-components)
+O fluxo de autenticação foi feito a partir de uma adaptação do apresentado pela Rocketseat [_aqui_](https://www.youtube.com/watch?v=pvrKHpXGO8E) e persiste o usuário logado por meio de um contexto de autenticação criado na própria autenticação. A implementação foi feita apenas no controle das rotas via SSR, mas o projeto está pronto para efetuar as validações nas chamadas da API. Pode ser um passo futuro.
 
-## How to use
+## Para rodar o projeto
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+Após clonar o repositório, é só rodar o comando ```npm start```, que executa a migração de um usuário fictício para ser usado com as seguintes credenciais:
+- E-mail: ```user@example.com```
+- Senha: ```password```
 
-```bash
-npx create-next-app --example with-styled-components with-styled-components-app
-# or
-yarn create next-app --example with-styled-components with-styled-components-app
-# or
-pnpm create next-app --example with-styled-components with-styled-components-app
-```
+## Testagem
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Com o tempo mais curto, foi implementado apenas um fluxo de testes e2e relacionados à autenticação do sistema, que podem ser executados através do comando ```npm run test```.
 
-### Try it on CodeSandbox
+## Algumas explicações...
 
-[Open this example on CodeSandbox](https://codesandbox.io/s/github/vercel/next.js/tree/canary/examples/with-styled-components)
-
-### Notes
-
-When wrapping a [Link](https://nextjs.org/docs/api-reference/next/link) from `next/link` within a styled-component, the [as](https://styled-components.com/docs/api#as-polymorphic-prop) prop provided by `styled` will collide with the Link's `as` prop and cause styled-components to throw an `Invalid tag` error. To avoid this, you can either use the recommended [forwardedAs](https://styled-components.com/docs/api#forwardedas-prop) prop from styled-components or use a different named prop to pass to a `styled` Link.
-
-<details>
-<summary>Click to expand workaround example</summary>
-<br />
-
-**components/StyledLink.js**
-
-```javascript
-import Link from 'next/link'
-import styled from 'styled-components'
-
-const StyledLink = ({ as, children, className, href }) => (
-  <Link href={href} as={as} passHref>
-    <a className={className}>{children}</a>
-  </Link>
-)
-
-export default styled(StyledLink)`
-  color: #0075e0;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    color: #40a9ff;
-  }
-
-  &:focus {
-    color: #40a9ff;
-    outline: none;
-    border: 0;
-  }
-`
-```
-
-**pages/index.js**
-
-```javascript
-import StyledLink from '../components/StyledLink'
-
-export default () => (
-  <StyledLink href="/post/[pid]" forwardedAs="/post/abc">
-    First post
-  </StyledLink>
-)
-```
-
-</details>
+Inicialmente, o objetivo era fazer o controle de três tabelas, usuários, cursos e matrículas para fazer a inscrição de usuários em cursos, porém conforme o prazo foi diminuído tive que optar por gerenciar as expectativas e deixar de implementar coisas a mais pra cuidar com o fluxo principal. Não removi estes conteúdos não usados pois ficam para uma possível implementação futura.
