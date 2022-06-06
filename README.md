@@ -6,12 +6,13 @@ Isso signfica que por mais que funcione numa opção _self hosted_ não há supo
 Fiz um vídeo explicando como funciona o fluxo principal neste vídeo disponível no botão abaixo, deixa um like!:
 ***
 <a href="https://youtu.be/9wendQ2O5T4" target="_blank">![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)</a>
+<a href="https://www.figma.com/file/8a7ns0unL7Y7GSnCEaNMwk/CRUD-Educa%C3%A7%C3%A3o?node-id=0%3A1" target="_blank">![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)</a>
 ***
 ## Implementação
 
 Para organização das pastas, foi aplicada a metodologia de [_Atomic Design_](https://atomicdesign.bradfrost.com/) e para a estilização dos componentes foi usada a biblioteca [_Styled Components_](https://styled-components.com/). As rotas de API são geradas e consumidas na própria aplicação.
 
-O layout foi baseado nos exemplos de componentes disponíveis na biblioteca [_Tailwind UI _](https://tailwindui.com/preview), e os protótipos criados estão disponíveis para visualização por meio [_deste link_](https://www.figma.com/file/8a7ns0unL7Y7GSnCEaNMwk/CRUD-Educa%C3%A7%C3%A3o?node-id=0%3A1).
+O layout foi baseado nos exemplos de componentes disponíveis na biblioteca [_Tailwind UI_](https://tailwindui.com/preview), e os protótipos criados estão disponíveis para visualização por meio [_deste link_](https://www.figma.com/file/8a7ns0unL7Y7GSnCEaNMwk/CRUD-Educa%C3%A7%C3%A3o?node-id=0%3A1).
 
 ## Autenticação
 
