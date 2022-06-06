@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+export {}
+
 describe('Testa funcionalidades relacionadas ao login', () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000")

@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "npx cypress run"
   },
   "dependencies": {
     "@types/react-modal": "^3.13.1",
